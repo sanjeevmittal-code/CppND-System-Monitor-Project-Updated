@@ -234,7 +234,7 @@ string LinuxParser::Ram(int pid) {
       string key, value;
       while (linestream >> key >> value) {
         if (KVmSize.compare(key) == 0) {
-          return value;
+          return std::to_string(std::stol(value)/1024);
         }
       }
     }
@@ -271,7 +271,6 @@ string LinuxParser::User(int pid) {
       std::istringstream linestream(line);
       string value;
       string user, username, uidvalue;
-      linestream >> user;
       while (linestream >> user >> value >> uidvalue) {
         if (uidvalue == LinuxParser::Uid(pid)) {
           result = user;
